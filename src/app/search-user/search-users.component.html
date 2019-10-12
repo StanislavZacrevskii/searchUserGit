@@ -1,0 +1,35 @@
+<div class="search-user__wrapper">
+    <div *ngIf="searchUserError" class="search-user__error">
+        {{ searchUserError }}
+    </div>
+    <label for="search-user__wrapper_search"
+           class="search-user__label">Search User</label>
+    <input type="text"
+           [formControl]="searchUserControl"
+           id="search-user__wrapper_search"
+           class="search-user__wrapper_search"
+           [ngClass]="{'input-error': searchUserError}"
+           (input)="searchUser($event);">
+</div>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Avatar</th>
+            <th>Login</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of allUsers" (click)="getUserRepos(user);">
+            <td>
+                <div class="user__avatar_wrapper">
+                    <img src="{{ user['avatar_url'] }}" class="user__avatar" alt="User avatar">
+                </div>
+            </td>
+            <td>
+                <div class="user__login">{{ user['login'] }}</div>
+            </td>
+        </tr>
+    </tbody>
+
+</table>

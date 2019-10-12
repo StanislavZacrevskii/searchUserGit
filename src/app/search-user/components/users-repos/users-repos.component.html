@@ -1,0 +1,53 @@
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let repo of repos" (click)="openModal(template, repo);">
+            <td>
+                <div class="user__repo_name">
+                    {{ repo['name'] }}
+                </div>
+            </td>
+            <td>
+                <div class="user__repo_description">
+                    {{ repo['description'] }}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{modalRepo.name}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ul class="modal__repo_list">
+            <li class="modal__repo_item">
+                <div class="repo_item_title">Description:</div>
+                <div class="modal_item_text">{{ modalRepo.description }}</div>
+            </li>
+            <li class="modal__repo_item">
+                <div class="repo_item_title">Language:</div>
+                <div class="modal_item_text">{{ modalRepo.language }}</div>
+            </li>
+            <li class="modal__repo_item">
+                <div class="repo_item_title">Has issues:</div>
+                <div class="modal_item_text">{{ modalRepo.has_issues  ? '&#10004;' : '&#10006;' }}</div>
+            </li>
+            <li class="modal__repo_item">
+                <div class="repo_item_title">html url:</div>
+                <div class="modal_item_text">
+                    <a href="{{ modalRepo.html_url }}" target="_blank" rel="noopener noreferrer">link</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</ng-template>
